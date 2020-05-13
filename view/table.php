@@ -40,21 +40,15 @@ include ("../model/dbconfig.php");
 			$sql = "select name `tagName` from tags";
 			$stmt = $conn->prepare($sql);
 			$stmt->execute(); 
-// var_dump($stmt->rowCount());
-			$cart = array();
+			$array_tags = array();
 			if($stmt->rowCount() > 0){
 				while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-	    	  //var_dump($row['tagName']);
-	   		  // echo "<br>";
-					array_push($cart, $row['tagName']);
+					array_push($array_tags, $row['tagName']);
 				}
 			}
-			var_dump($cart);
-			<input type="text" data-role="tagsinput" class="text-dark" value="甜的,鹹的,正餐,非正餐" >
-
+			$string_tags =implode(",",$array_tags);
+			echo "<input type=\"text\" data-role=\"tagsinput\" class=\"text-dark\" value=\"$string_tags\" >"
 			?>
-
-			<input type="text" data-role="tagsinput" class="text-dark" value="甜的,鹹的,正餐,非正餐" >
 		</div>
 
 		<div style="background-color:#FAF4FF" >
