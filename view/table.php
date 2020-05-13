@@ -1,3 +1,6 @@
+<?php
+include ("../model/dbconfig.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +12,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" 
 	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" 
 	crossorigin="anonymous">
-	<!-- <link href="tagsinput.css" rel="stylesheet" type="text/css"> -->
+	<link href="tagsinput.css" rel="stylesheet" type="text/css">
 
 	<!-- JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
@@ -21,22 +24,38 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
 	integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" 
 	crossorigin="anonymous"></script>
-<!-- 	<script src="tagsinput.js"></script>
--->
-<script src="bootstrap-tagsinput.js"></script>
-<link rel="stylesheet" type="text/css" href="bootstrap-tagsinput.css" />
+	<!-- <script src="tagsinput.js"></script> -->
+	<script src="bootstrap-tagsinput.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap-tagsinput.css" />
 
 </head>
 <body>
 	<div class="container-fluid">
 		<div style="background-color:#D7FFEE" > 
-			<h1>好想塞呷桂</h1>
-			
-			<input type="text" data-role="tagsinput" value="甜的,鹹的,正餐,非正餐" >
+			<h1>好想塞呷桂</h1>	
+			<?php
 
+			$db_connection = new Database();
+			$conn = $db_connection->dbConnection();
+			$sql = "select name `tagName` from tags";
+			$stmt = $conn->prepare($sql);
+			$stmt->execute(); 
+// var_dump($stmt->rowCount());
+			$cart = array();
+			if($stmt->rowCount() > 0){
+				while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+	    	  //var_dump($row['tagName']);
+	   		  // echo "<br>";
+					array_push($cart, $row['tagName']);
+				}
+			}
+			var_dump($cart);
+			<input type="text" data-role="tagsinput" class="text-dark" value="甜的,鹹的,正餐,非正餐" >
+
+			?>
+
+			<input type="text" data-role="tagsinput" class="text-dark" value="甜的,鹹的,正餐,非正餐" >
 		</div>
-
-
 
 		<div style="background-color:#FAF4FF" >
 			<table class="table">
@@ -54,13 +73,11 @@
 						<th scope="row">1</th>
 						<td>甘單咖啡</td>
 						<td>700台南市中西區民權路二段4巷13號</td>
-						<td>
-							
+						<td>	
 							<span class="badge badge-pill badge-warning">咖啡</span>
 							<span class="badge badge-pill badge-success">啤酒</span>
 						</td>
-						<td><button type="button" class="btn btn-info  btn-sm" > GO </button></td>
-
+						<td><button type="button" class="btn btn-info  btn-sm"> GO </button></td>
 					</tr>
 				</tbody>
 			</table>
