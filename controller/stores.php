@@ -9,16 +9,15 @@ class Stores{
 
 
 	function get_all_tag(){
-		// $sql_get_all_tag = "select name `tagName` from tags";
 		$stmt2 = $this->conn->prepare(" SELECT * from tags ");	
-		$stmt2->execute();			
-		// $result = $stmt2->get_result();		
-		// var_dump($result->num_rows);
-		// echo $stmt2->fetchColumn();
+		$stmt2->execute();		
+		// $result = $stmt->get_result();		
+		return $stmt2;	
+	
+		//return $stmt2;
 
+/*
 		$resultRow = $stmt2->rowCount();
-		// var_dump($resultRow);
-		// echo "<br>";
 		if($resultRow > 0){
 			$posts_array = [];
 			while($row = $stmt2->fetch(PDO::FETCH_ASSOC)){
@@ -29,18 +28,12 @@ class Stores{
 				];
 				array_push($posts_array, $post_data);
 			}
-
 		}
 		echo json_encode($posts_array);
 
+*/
 
-
-		// $result = $stmt2->fetch(PDO::FETCH_ASSOC);
-		// var_dump($result);
-		//$result2 = $stmt2->bind_result($name);		
-		//return $result2;	
-		//var_dump ($stmt2->fetch());
-
+	
 	}
 
 	function readAll(){	
