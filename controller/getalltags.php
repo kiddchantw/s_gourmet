@@ -20,12 +20,6 @@ $result = $tnstores->get_all_tag();
 
 $resultRow = $result->rowCount();
 
-// var_dump($resultRow);
-// $stmt2 = $tnstores->conn->prepare(" SELECT * from tags ");	
-// $stmt2->execute();			
-
-// $resultRow = $stmt2->rowCount();
-
 if($resultRow > 0){
 	$posts_array = [];
 	while($row = $result->fetch(PDO::FETCH_ASSOC)){

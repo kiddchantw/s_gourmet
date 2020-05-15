@@ -17,47 +17,28 @@ $tnstores = new Stores($db);
 
 // $tnstores->id = (isset($_GET['id']) && $_GET['id']) ? $_GET['id'] : '0';
 
-$result2 = $tnstores->get_all_tag();
-
 $result = $tnstores->readAll();
+$resultRow = $result->rowCount();
+if($resultRow > 0){
+	$posts_array = [];
+	while($row = $result->fetch(PDO::FETCH_ASSOC)){
+		$post_data = [
+			'id' => $row['stores_id'],
+			'name' => $row['store_name'],
+			'address' => $row['store_address'],
+			'tags' => $row['tag_name'],		
+			'gps' => $row['gps']
+		];
+		array_push($posts_array, $post_data);
+	}
+
+}
+echo json_encode($posts_array);
 
 
 
 
-// echo "<br>";
-// var_dump($result2->num_row);
 
 
-// echo "<br>";
-// var_dump($result->num_row)
-
-
-// echo $result->num_rows;
-
-
-// if($result->num_rows > 0) {    
-//     $itemRecords=array();
-//     $itemRecords["items"]=array(); 
-
-
-//     while ($item = $result->fetch_assoc()) {    
-
-//         extract($item); 
-//         $itemDetails=array(
-//             "id" => $id,
-//             // "stores_id" => $stores_id,
-//             // "store_name" =>  $store_name
-//             //        
-//         ); 
-//        array_push($itemRecords["items"], $itemDetails);
-//     }    
-//     http_response_code(200);     
-//     echo json_encode($itemRecords);
-// }else{     
-//     http_response_code(404);     
-//     echo json_encode(
-//         array("message" => "No item found.")
-//     );
-// } 
 
 ?>
