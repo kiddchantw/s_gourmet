@@ -14,10 +14,7 @@ $db = $database->dbConnection();
 
 
 $tnstores = new Stores($db);
-
-
 $result = $tnstores->get_all_tag();
-
 $resultRow = $result->rowCount();
 
 if($resultRow > 0){
@@ -30,7 +27,6 @@ if($resultRow > 0){
 		];
 		array_push($posts_array, $post_data);
 	}
-
 }
 echo json_encode($posts_array);
 
