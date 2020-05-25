@@ -38,6 +38,4 @@ if(!empty($tagname)){
 echo json_encode($posts_array);
 
 
-
-
 ?>
