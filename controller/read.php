@@ -15,7 +15,10 @@ $db = $database->dbConnection();
 
 $tnstores = new Stores($db);
 
-$tnstores->id = (isset($_GET['id']) && $_GET['id']) ? $_GET['id'] : '0';
+$tnstores->id = 
+(isset($_GET['id']) && $_GET['id'])
+ ? $_GET['id'] 
+ : '0';
 
 $result = $tnstores->readAll();
 $resultRow = $result->rowCount();

@@ -17,25 +17,20 @@ $input_data = file_get_contents('php://input');
 $input_json = json_decode($input_data,true);
 $tagname = $input_json["tagname"];
 
-$posts_array = [];
 $result_message = "";
-if(!empty($tagname)){
-	$new_tag_item->name = $tagname;
-	$result_message = $new_tag_item->addTag();
 
-	$post_data = [
-		'action' => "add tag name",
-		'message' => $result_message
-	];
-	array_push($posts_array, $post_data);
-}else{
-	$post_data = [
-		'action' => "add tag name",
-		'message' => "please insert new tag name"
-	];
-	array_push($posts_array, $post_data);
+if (empty($tagname)){
+	http_response_code(403);  
+	$message ="please insert new tag name";
+	responseMessage("add tag name",$message);
 }
-echo json_encode($posts_array);
+
+$new_tag_item->name = $tagname;
+$result_message = $new_tag_item->addTag();
+responseMessage("add tag name",$result_message);
+
+
+
 
 
 ?>
