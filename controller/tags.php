@@ -1,5 +1,5 @@
 <?php
-class tags{   
+class Tags{   
 
 	public $name;
 
@@ -33,28 +33,17 @@ class tags{
 
 		$return_message ="";
 		$delete_tagname = $this->name;
-
-		// echo "$delete_tagname";
-
-		$return_message ="";
+		$return_message = "";
 		try {
 			$delete_tagname = $this->name;
-			$query_delete  = 
-			"delete from  tags where name = '".$delete_tagname."'";
-				
+			$query_delete  = "delete from  tags where name = '".$delete_tagname."'";
 			$result_row = $this->conn->exec($query_delete);
 			// echo "testRow: ".$result_row;
-
-			// $stmt = $this->conn->prepare($query_delete);
-			// $stmt->execute();
-			// $result_row = $stmt->rowCount();
-
 			if ($result_row == 0) {
 				$return_message = "delete tag not happen " ;
 			}else{
 				$return_message = "delete tag succuess: " ;
 			}
-
 
 		} catch ( PDOException $e) {
 			// echo $e->getMessage();

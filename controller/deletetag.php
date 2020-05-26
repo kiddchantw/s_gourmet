@@ -12,28 +12,39 @@ include_once '../controller/tags.php';
 $database = new Database();
 $db = $database->dbConnection();
 
-$delete_tag_item = new Tags($db);
-$input_data = file_get_contents('php://input');
-$input_json = json_decode($input_data,true);
-$tagname = $input_json["tagname"];
+$deleteItem = new Tags($db);
 
-$posts_array = [];
-$result_message = "";
-if(!empty($tagname)){
-	$delete_tag_item->name = $tagname;
-	$result_message = $delete_tag_item->deleteTag();
-	$post_data = [
-		'action' => "delete tag ",
-		'message' => $result_message
-	];
-	array_push($posts_array, $post_data);
-}else{
-	$post_data = [
-		'action' => "delete tag ",
-		'message' => "please insert new tag name"
-	];
-	array_push($posts_array, $post_data);
+$dataInput = file_get_contents('php://input');
+$jsonInput = json_decode($dataInput,true);
+$tagname = $jsonInput["tagname"];
+
+
+if (empty($tagname)){
+	http_response_code(403);  
+	$message ="please insert delete tag name";
+	responseMessage("delete tag",$message);
 }
-echo json_encode($posts_array);
+
+$deleteItem->name = $tagname;
+$resultMessage = $deleteItem->deleteTag();
+responseMessage("delete tag",$resultMessage);
+
+
+
+
+function responseMessage($act,$msg){
+	$arrayResponse = [];
+	$elementResponse = [
+		'action' => $act ,
+		'message' => $msg
+	];
+	array_push($arrayResponse, $elementResponse);
+	echo json_encode($arrayResponse);
+	exit;
+}
+
+
+
+
 
 ?>

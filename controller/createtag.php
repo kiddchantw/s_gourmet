@@ -12,37 +12,34 @@ include_once '../controller/tags.php';
 $database = new Database();
 $db = $database->dbConnection();
 
-$new_tag_item = new Tags($db);
-$input_data = file_get_contents('php://input');
-$input_json = json_decode($input_data,true);
-$tagname = $input_json["tagname"];
+$newTag = new Tags($db);
+$dataInput = file_get_contents('php://input');
+$jsonInput = json_decode($dataInput,true);
+$tagname = $jsonInput["tagname"];
 
-$result_message = "";
+$resultMessage = "";
 
 if (empty($tagname)){
-	// http_response_code(403);  
-	exit("403");
-
+	http_response_code(403);  
 	$message ="please insert new tag name";
-	responseMessage("add tag name",$message);
-
+	responseMessage("add tag ",$message);
 }
 
-$new_tag_item->name = $tagname;
-$result_message = $new_tag_item->addTag();
-responseMessage("add tag name",$result_message);
+$newTag->name = $tagname;
+$resultMessage = $newTag->addTag();
+responseMessage("add tag ",$resultMessage);
+
 
 //show response body
 function responseMessage($act,$msg){
-	$posts_array = [];
-	$post_data = [
+	$arrayResponse = [];
+	$elementResponse = [
 		'action' => $act ,
 		'message' => $msg
 	];
-	array_push($posts_array, $post_data);
-	echo json_encode($posts_array);
+	array_push($arrayResponse, $elementResponse);
+	echo json_encode($arrayResponse);
 	exit;
-
 }
 
 
