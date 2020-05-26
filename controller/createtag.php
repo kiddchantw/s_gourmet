@@ -20,16 +20,30 @@ $tagname = $input_json["tagname"];
 $result_message = "";
 
 if (empty($tagname)){
-	http_response_code(403);  
+	// http_response_code(403);  
+	exit("403");
+
 	$message ="please insert new tag name";
 	responseMessage("add tag name",$message);
+
 }
 
 $new_tag_item->name = $tagname;
 $result_message = $new_tag_item->addTag();
 responseMessage("add tag name",$result_message);
 
+//show response body
+function responseMessage($act,$msg){
+	$posts_array = [];
+	$post_data = [
+		'action' => $act ,
+		'message' => $msg
+	];
+	array_push($posts_array, $post_data);
+	echo json_encode($posts_array);
+	exit;
 
+}
 
 
 

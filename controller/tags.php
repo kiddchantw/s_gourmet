@@ -34,18 +34,28 @@ class tags{
 		$return_message ="";
 		$delete_tagname = $this->name;
 
-		echo "$delete_tagname";
+		// echo "$delete_tagname";
 
 		$return_message ="";
 		try {
 			$delete_tagname = $this->name;
-			$query_insert  = 
+			$query_delete  = 
 			"delete from  tags where name = '".$delete_tagname."'";
-			$stmt = $this->conn->prepare($query_insert);
-			$stmt->execute();
-			var_dump($stmt->num_rows);
+				
+			$result_row = $this->conn->exec($query_delete);
+			// echo "testRow: ".$result_row;
 
-			$return_message = "delete tag succuess: row" .$stmt->num_rows;
+			// $stmt = $this->conn->prepare($query_delete);
+			// $stmt->execute();
+			// $result_row = $stmt->rowCount();
+
+			if ($result_row == 0) {
+				$return_message = "delete tag not happen " ;
+			}else{
+				$return_message = "delete tag succuess: " ;
+			}
+
+
 		} catch ( PDOException $e) {
 			// echo $e->getMessage();
 			// $return_message = "something error";
@@ -56,18 +66,7 @@ class tags{
 	}	
 
 	
-
-	function responseMessage($msg){
-		$posts_array = [];
-		$post_data = [
-			'action' => "add tag name",
-			'message' => $msg
-		];
-		array_push($posts_array, $post_data);
-		echo json_encode($posts_array);
-		exit;
-	}
-
+	
 
 }
 ?>

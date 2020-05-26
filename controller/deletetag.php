@@ -23,13 +23,13 @@ if(!empty($tagname)){
 	$delete_tag_item->name = $tagname;
 	$result_message = $delete_tag_item->deleteTag();
 	$post_data = [
-		'action' => "delete tag name",
+		'action' => "delete tag ",
 		'message' => $result_message
 	];
 	array_push($posts_array, $post_data);
 }else{
 	$post_data = [
-		'action' => "delete tag name",
+		'action' => "delete tag ",
 		'message' => "please insert new tag name"
 	];
 	array_push($posts_array, $post_data);
