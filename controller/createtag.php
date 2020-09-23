@@ -37,7 +37,7 @@ function responseMessage($act,$msg){
 		'action' => $act ,
 		'message' => $msg
 	];
-	array_push($arrayResponse, $elementResponse);
+	array_push($ar rayResponse, $elementResponse);
 	echo json_encode($arrayResponse);
 	exit;
 }

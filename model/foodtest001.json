@@ -8,8 +8,8 @@
     "properties" : {
       "Google Maps URL" : "http://maps.google.com/?cid=10769310045630248032",
       "Location" : {
-        "Address" : "700台湾台南市中西區樹林街二段290號",
-        "Business Name" : "Coffee Cafe' 咖啡珈琲(巴黎小餐館)",
+        "Address" : "700台湾台南市中西區樹林街二段290",
+        "Business Name" : "Coffee Cafe 咖啡珈琲(巴黎小餐館)",
         "Country Code" : "TW",
         "Geo Coordinates" : {
           "Latitude" : "22.9865020",
@@ -17,7 +17,7 @@
         }
       },
       "Published" : "2017-11-20T02:39:02Z",
-      "Title" : "Coffee Cafe' 咖啡珈琲(巴黎小餐館)",
+      "Title" : "Coffee Cafe 咖啡珈琲(巴黎小餐館)",
       "Updated" : "2020-05-08T02:45:37Z"
     },
     "type" : "Feature"
